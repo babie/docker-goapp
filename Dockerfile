@@ -114,7 +114,9 @@ RUN version="1.9.40" \
   | tar xzfp - -C /usr/local/ \
   && mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
   && apk del build-time-only
+
 RUN go get -u github.com/Masterminds/glide/...
+ENV PATH="/usr/local/go_appengine/gopath/bin:$PATH"
 
 CMD type python2 \
   && go \
