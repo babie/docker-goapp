@@ -12,7 +12,7 @@ ENV LANG C.UTF-8
 
 # install ca-certificates so that HTTPS works consistently
 # the other runtime dependencies for Python are installed later
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates git
 
 ENV GPG_KEY C01E1CAD5EA2C4F0B8E3571504C367C218ADD4FF
 ENV PYTHON_VERSION 2.7.12
@@ -114,6 +114,7 @@ RUN version="1.9.40" \
   | tar xzfp - -C /usr/local/ \
   && mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
   && apk del build-time-only
+RUN go get -u github.com/Masterminds/glide/...
 
 CMD type python2 \
   && go \
